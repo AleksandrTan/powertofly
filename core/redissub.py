@@ -9,16 +9,18 @@ class RedisSub:
     def __init__(self):
         self.redis_connector = redis.Redis(host=config.REDIS_HOST, port=config.REDIS_PORT, db=0)
         self.subscribes = self.redis_connector.pubsub()
-        self.subscribes.subscribe("data-for-power-my")
+        self.subscribes.subscribe(**{"data-for-power-my": self.handler})
+        self.subscribes.run_in_thread(sleep_time=1)
 
-    def get_data(self):
-        return self.subscribes.get_message()
+    def handler(self, message):
+        print(message)
+        return message
 
 
 if __name__ == "__main__":
     pub = RedisSub()
     while True:
-        e = pub.get_data()
+        e = pub.subscribes.get_message()
         if e:
             if type(e["data"]) != int:
                 print(e["data"].decode())
