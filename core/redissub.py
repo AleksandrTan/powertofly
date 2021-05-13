@@ -11,22 +11,13 @@ import config
 
 class RedisSub:
 
-    def __init__(self):
+    def __init__(self, task_data):
+        self.task_data = task_data
         self.redis_connector = redis.Redis(host=config.REDIS_HOST, port=config.REDIS_PORT, db=0)
         self.subscribes = self.redis_connector.pubsub()
         self.subscribes.subscribe(**{"data-for-power-my": self.handler})
         self.thread = self.subscribes.run_in_thread(sleep_time=0.001)
 
     def handler(self, message):
-        print(message)
-        return message
-
-
-if __name__ == "__main__":
-    pub = RedisSub()
-    while True:
-        e = pub.subscribes.get_message()
-        if e:
-            if type(e["data"]) != int:
-                print(e["data"].decode())
-        time.sleep(2)
+        if type(message["data"]) != int:
+            self.task_data["task"] = message["data"].decode()

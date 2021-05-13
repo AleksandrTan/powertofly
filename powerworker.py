@@ -18,7 +18,7 @@ class PowertoflyWorker(LogModule):
         self.task_data = dict()
         # Outgoing message store
         self.send_data = dict()
-        self.redis_subscriber = RedisSub()
+        self.redis_subscriber = RedisSub(self.task_data)
         self.redis_publisher = RedisPub()
         self.parser = Parser()
         self.sender = Sender()
@@ -29,7 +29,9 @@ class PowertoflyWorker(LogModule):
         while self.execution_status:
             # check tasks
             if self.task_data:
-                print(self.task_data)
+                print(self.task_data, 4000)
+            else:
+                print("No data")
             time.sleep(2)
 
     def set_task_data(self, sub: RedisSub):
@@ -38,10 +40,7 @@ class PowertoflyWorker(LogModule):
         :param sub: RedisSub object
         :return: None
         """
-        e = sub.subscribes.get_message()
-        if e:
-            if type(e["data"]) != int:
-                self.task_data["task"] = e["data"].decode()
+        sub.subscribes.get_message()
 
 
 if __name__ == "__main__":
