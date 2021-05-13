@@ -1,6 +1,7 @@
 """
 Parsing the target resource
 """
+import time
 from logsource.logmodule import LogModule
 from core.request_worker import RequestsWorker
 from supporting.analyzer import Analyzer
@@ -17,4 +18,5 @@ class Parser(LogModule):
 
     def start(self, send_data):
         print("Parser Work")
+        time.sleep(5)
         return True

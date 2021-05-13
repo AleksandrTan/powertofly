@@ -1,4 +1,4 @@
-PORTAL_URL = "https://powertofly.com/"
+PORTAL_URL = "https://powertofly.com/jobs/"
 # redis
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
