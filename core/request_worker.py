@@ -44,8 +44,6 @@ class RequestsWorker:
         try:
             response.raise_for_status()
         except requests.HTTPError as error:
-            # In case of error 400, check the fact of two-factor authentication
-            # TODO Remember to handle this situation!!!
             if response.status_code == 400 and data["message"] == "challenge_required":
                 return {"status": False, "error": True, "error_type": data["error_type"], "text": error,
                         "http_error": response.status_code}

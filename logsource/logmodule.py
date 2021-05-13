@@ -5,6 +5,7 @@ from logsource.logconfig import logger
 import config
 from logsource import logmap
 
+
 class LogModule:
     def __init__(self):
         self.map_messages = logmap.MESSAGES_LOG

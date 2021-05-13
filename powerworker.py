@@ -2,7 +2,7 @@
 Software designed for parsing, mailing of letters for resource https://powertofly.com/
 """
 import time
-import json
+
 from logsource.logmodule import LogModule
 from core.redissub import RedisSub
 from core.redispub import RedisPub
