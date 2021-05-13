@@ -2,6 +2,7 @@
 Software designed for parsing, mailing of letters for resource https://powertofly.com/
 """
 import time
+import json
 from logsource.logmodule import LogModule
 from core.redissub import RedisSub
 from core.redispub import RedisPub
@@ -29,7 +30,12 @@ class PowertoflyWorker(LogModule):
         while self.execution_status:
             # check tasks
             if self.task_data:
-                print(self.task_data, 4000)
+                # determine what type of task is set to work
+                if self.task_data["task"]["cmd"] == "start_parser":
+                    print("Start parser")
+                else:
+                    print("Start sender")
+                #
             else:
                 print("No data")
             time.sleep(2)
@@ -37,6 +43,7 @@ class PowertoflyWorker(LogModule):
     def set_task_data(self, sub: RedisSub):
         """
         Initializes a task by receiving a message from the main system
+        Provides a persistent connection to the system server
         :param sub: RedisSub object
         :return: None
         """
