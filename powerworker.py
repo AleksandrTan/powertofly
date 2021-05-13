@@ -32,7 +32,6 @@ class PowertoflyWorker(LogModule):
             if self.task_data:
                 # determine what type of task is set to work
                 if self.task_data["task"]["cmd"] == "start_parser":
-                    print("Start parser")
                     parser_result = self.parser.start(self.send_data)
                 else:
                     sender_result = self.sender.start(self.send_data)
