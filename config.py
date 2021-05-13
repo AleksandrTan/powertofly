@@ -1,3 +1,4 @@
+PORTAL_URL = "https://powertofly.com/"
 # redis
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
