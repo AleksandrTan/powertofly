@@ -11,5 +11,5 @@ class Parser(LogModule):
         super().__init__()
         self.requests = RequestsWorker()
 
-    def start(self):
+    def start(self, send_data):
         pass
