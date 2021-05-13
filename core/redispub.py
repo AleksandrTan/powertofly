@@ -1,3 +1,8 @@
+"""
+Message generator for the main system
+Used Redis
+Messages are received in a separate thread
+"""
 import redis
 import time
 import json

@@ -1,3 +1,8 @@
+"""
+Subscriber to the distribution of tasks from the main system
+Used Redis
+Messages are received in a separate thread
+"""
 import redis
 import time
 
@@ -10,7 +15,7 @@ class RedisSub:
         self.redis_connector = redis.Redis(host=config.REDIS_HOST, port=config.REDIS_PORT, db=0)
         self.subscribes = self.redis_connector.pubsub()
         self.subscribes.subscribe(**{"data-for-power-my": self.handler})
-        self.subscribes.run_in_thread(sleep_time=0.001)
+        self.thread = self.subscribes.run_in_thread(sleep_time=0.001)
 
     def handler(self, message):
         print(message)
