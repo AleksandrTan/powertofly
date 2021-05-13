@@ -14,8 +14,8 @@ class RedisPub:
     def connector(self):
         return self.redis_connector
 
-    def set_data(self, i):
-        self.connector.publish("data-for-server", json.dumps({"status": True, "cmd": f"start_parser - {i}"}))
+    def set_data(self, num):
+        self.connector.publish("data-for-server", json.dumps({"status": True, "cmd": f"start_parser - {num}"}))
 
     def get_data(self):
         return self.connector.get("Alex")

@@ -3,8 +3,7 @@ import json
 
 from logsource.logconfig import logger
 import config
-import logmap
-
+from logsource import logmap
 
 class LogModule:
     def __init__(self):
