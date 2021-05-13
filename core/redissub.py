@@ -10,7 +10,7 @@ class RedisSub:
         self.redis_connector = redis.Redis(host=config.REDIS_HOST, port=config.REDIS_PORT, db=0)
         self.subscribes = self.redis_connector.pubsub()
         self.subscribes.subscribe(**{"data-for-power-my": self.handler})
-        self.subscribes.run_in_thread(sleep_time=1)
+        self.subscribes.run_in_thread(sleep_time=0.001)
 
     def handler(self, message):
         print(message)
